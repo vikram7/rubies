@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'launch_drills/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "launch_drills"
+  spec.name          = "ruby_driller"
   spec.version       = LaunchDrills::VERSION
   spec.authors       = ["Vikram Ramakrishnan"]
   spec.email         = ["lord.ezar@gmail.com"]
