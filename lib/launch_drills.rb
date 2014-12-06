@@ -105,9 +105,22 @@ def all_values(ds)
   values
 end
 
+puts "\e[H\e[2J"
+puts "==============================".colorize(:light_magenta)
+puts "Welcome to Ruby Driller"
+puts "         /\\_/\\          "
+puts "    ____/ o o \\         "
+puts "  /~____  =ø= /         "
+puts " (______)__m_m)         "
+puts
+puts "            LEGEND            ".colorize(:light_magenta)
+puts "NEW : get a new data structure"
+puts "==============================".colorize(:light_magenta)
+puts "Press enter to continue . . . "
+gets.chomp
 
-
-
+num_correct = 0
+num_wrong = 0
 array = data_structure
 playing = true
 while playing == true
@@ -117,9 +130,18 @@ while playing == true
     puts
     puts "Here is an array of hashes we have some questions for you about:".colorize(:light_blue)
     puts "array = "
-    ap array, index: false
+    if array.first.is_a? Array
+      PP.pp array
+    elsif array.first.is_a? Fixnum
+      PP.pp array
+    else
+      ap array, index: false
+    end
     puts
-    puts "Write some ruby code to find the following value: ".colorize(:light_blue) + answer.to_s
+    puts "Write some ruby code to find the following value: ".colorize(:light_blue)
+    puts answer.to_s
+    puts
+    print "[1] ruby_drills(main)> "
     input = gets.chomp
     if input == "NEW"
       array = data_structure
@@ -129,21 +151,30 @@ while playing == true
         output = eval(input)
       rescue
         puts
-        puts "Sorry, that code resulted in an error.".colorize(:red)
+        puts "Sorry, that code resulted in an error.".colorize(:light_red)
       else
         if answer != output
+          num_wrong += 1
+          puts "=> " + output.to_s
           puts
-          puts "Sorry, that code produced . . . ".colorize(:red)
-          puts output.to_s
-          puts "The right answer is . . . ".colorize(:red)
+          puts "Sorry, that code is incorrect. ".colorize(:light_red)
+          puts
+          puts "The right answer is . . . ".colorize(:light_red)
           puts answer.to_s
-          puts "Try again!".colorize(:red)
+          puts "Try again!".colorize(:light_red)
         else
+          num_correct += 1
+          puts "=> " + output.to_s
+          puts
           puts "Correct!".colorize(:green)
           correct = true
         end
       end
     end
+    puts "==============================".colorize(:light_yellow)
+    puts "Number correct this session: ".colorize(:green) + num_correct.to_s
+    puts "Number wrong this session  : ".colorize(:light_red) + num_wrong.to_s
+    puts "==============================".colorize(:light_yellow)
   end
 end
 
