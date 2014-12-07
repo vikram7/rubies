@@ -72,6 +72,13 @@ def hash_three
   hash
 end
 
+def nested_hash(levels)
+  return nil if levels <= 0
+  array = nested_hash(levels - 1)
+  name = Faker::Name.first_name
+  { name => array.nil? ? rand(1..100) : [array] }
+end
+
 def mini_array
   (-1_000..1_000).sort_by{ rand }.sample 3
 end
@@ -101,12 +108,15 @@ def data_structure
   when 2
     hash_two
   when 3
-    rand(1..4).times do
+    rand(1..3).times do
       array << hash_three
     end
     array
   when 4
     random_array
+  # when 5
+  #   num = rand(1..5)
+  #   nested_hash(num)
   end
 end
 
@@ -131,20 +141,31 @@ def all_values(ds)
 end
 
 puts "\e[H\e[2J"
+puts"
+.______       __    __  .______   ____    ____
+|   _  \\     |  |  |  | |   _  \\  \\   \\  /   /
+|  |_)  |    |  |  |  | |  |_)  |  \\   \\/   /
+|      /     |  |  |  | |   _  <    \\_    _/
+|  |\\  \\----.|  `--'  | |  |_)  |     |  |
+| _| `._____| \\______/  |______/      |__|
+
+ _______  .______       __   __       __          _______.
+|       \\ |   _  \\     |  | |  |     |  |        /       |
+|  .--.  ||  |_)  |    |  | |  |     |  |       |   (----`
+|  |  |  ||      /     |  | |  |     |  |        \\   \\
+|  '--'  ||  |\\  \\----.|  | |  `----.|  `----.----)   |
+|_______/ | _| `._____||__| |_______||_______|_______/
+
+".colorize(:light_magenta)
 puts "==============================".colorize(:light_magenta)
-puts "Welcome to Ruby Driller"
-puts "         /\\_/\\          "
-puts "    ____/ o o \\         "
-puts "  /~____  =ø= /         "
-puts " (______)__m_m)         "
-puts
 puts "            LEGEND            ".colorize(:light_magenta)
 puts "NEW : get a new data structure"
-puts "RUN : executes any inputted code"
-puts "EXIT: exit program"
+# puts "RUN : executes any inputted code"
+# puts "EXIT: exit program"
 puts "==============================".colorize(:light_magenta)
 puts "Press enter to continue . . . "
 gets.chomp
+puts "\e[H\e[2J"
 
 num_correct = 0
 num_wrong = 0
