@@ -4,6 +4,8 @@ require 'faker'
 require 'colorize'
 require 'pp'
 require 'awesome_print'
+require_relative 'random_array'
+require_relative 'random_hash'
 
 module LaunchDrills
   # Your code goes here...
@@ -22,101 +24,20 @@ class Hash
   end
 end
 
-def children
-  array = Array.new
-  rand(1..3).times do
-    array << Faker::Name.first_name
-  end
-  array
-end
-
-def has_kids?
-  rand(2) == 1
-end
-
-def hash_one
-  hash = Hash.new
-  10.times do
-    name = Faker::Company.name
-    bs = Faker::Company.bs
-    hash[name] = bs
-  end
-  hash
-end
-
-def hash_two
-  hash = Hash.new
-  10.times do
-    email = Faker::Internet.email
-    num = rand(1..1000)
-    hash[email] = num
-  end
-  hash
-end
-
-def hash_three
-  hash = Hash.new
-  length = rand(1..5)
-  count = 1
-  while count <= length
-    details = Hash.new
-    name = Faker::Name.name
-    phone = Faker::PhoneNumber.cell_phone
-    company = Faker::Company.name
-    details["phone"] = phone
-    details["company"] = company
-    details["children"] = children if has_kids?
-    hash[name] = details
-    count += 1
-  end
-  hash
-end
-
-def nested_hash(levels)
-  return nil if levels <= 0
-  array = nested_hash(levels - 1)
-  name = Faker::Name.first_name
-  { name => array.nil? ? rand(1..100) : [array] }
-end
-
-def mini_array
-  (-1_000..1_000).sort_by{ rand }.sample 3
-end
-
-def nesting_array
-  array = Array.new
-  rand(1..3).times do
-    array << mini_array
-  end
-  array.each do |a|
-    a << mini_array
-  end
-  array
-end
-
-def random_array
-  depth = rand(0..3)
-  nesting_array.flatten(depth)
-end
-
 def data_structure
-  choice = rand(1..4)
-  array = Array.new
+  choice = rand(1..3)
   case choice
   when 1
-    hash_one
+    RandomHash.new.generate
   when 2
-    hash_two
+    RandomArray.new.generate
   when 3
+    array = Array.new
+    hash = RandomHash.new.generate
     rand(1..3).times do
-      array << hash_three
+      array << RandomHash.new.hash_three
     end
     array
-  when 4
-    random_array
-  # when 5
-  #   num = rand(1..5)
-  #   nested_hash(num)
   end
 end
 
