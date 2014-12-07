@@ -1,4 +1,4 @@
-# require "launch_drills/version"
+# require "rubies/version"
 require 'pry'
 require 'faker'
 require 'colorize'
@@ -6,10 +6,6 @@ require 'pp'
 require 'awesome_print'
 require_relative 'random_array'
 require_relative 'random_hash'
-
-module LaunchDrills
-  # Your code goes here...
-end
 
 def data_structure
   choice = rand(1..3)
