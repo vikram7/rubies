@@ -86,7 +86,9 @@ while playing == true
     puts
     puts "We have some questions for you about this #{current.class.to_s.downcase}:".colorize(:light_blue)
     puts "current = "
-    if current.first.is_a? Array
+    if current.is_a? Hash
+      ap current, index: false
+    elsif current.first.is_a? Array
       PP.pp current
     elsif current.first.is_a? Fixnum
       PP.pp current
@@ -99,6 +101,7 @@ while playing == true
     puts
     print "[1] ruby_drills(main)> "
     input = gets.chomp
+    input.gsub("\"","\'")
     # $/ = "RUN"
     # input = STDIN.gets
     # input = input.gsub("\n", ";").gsub("RUN", "")
@@ -109,9 +112,10 @@ while playing == true
     else
       begin
         output = eval(input)
-      rescue
+      rescue StandardError => e
         puts
-        puts "Sorry, that code resulted in an error.".colorize(:light_red)
+        puts "Sorry, that code resulted in an error:".colorize(:light_red)
+        puts "#{e}".colorize(:red)
       else
         if answer != output
           num_wrong += 1
