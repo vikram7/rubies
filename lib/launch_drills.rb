@@ -34,7 +34,27 @@ def has_kids?
   rand(2) == 1
 end
 
-def random_hash
+def hash_one
+  hash = Hash.new
+  10.times do
+    name = Faker::Company.name
+    bs = Faker::Company.bs
+    hash[name] = bs
+  end
+  hash
+end
+
+def hash_two
+  hash = Hash.new
+  10.times do
+    email = Faker::Internet.email
+    num = rand(1..1000)
+    hash[email] = num
+  end
+  hash
+end
+
+def hash_three
   hash = Hash.new
   length = rand(1..5)
   count = 1
@@ -73,28 +93,33 @@ def random_array
 end
 
 def data_structure
-  choice = rand(1..2)
+  choice = rand(1..4)
   array = Array.new
-  if choice == 1
+  case choice
+  when 1
+    hash_one
+  when 2
+    hash_two
+  when 3
     rand(1..4).times do
-      array << random_hash
+      array << hash_three
     end
-  elsif choice == 2
-    array = random_array
+    array
+  when 4
+    random_array
   end
-  array
 end
 
 def all_values(ds)
   values = Array.new
-
-  if ds.flatten.first.is_a? Fixnum
+  if ds.is_a? Hash
+    values = ds.values
+  elsif ds.flatten.first.is_a? Fixnum
     values = ds.flatten
   else
     ds.each do |hash|
       hash.deep_traverse{ |path, value| values << value }
     end
-
     values.each do |value|
       if value.is_a? Array
         value.each { |element| values << element }
@@ -115,27 +140,29 @@ puts " (______)__m_m)         "
 puts
 puts "            LEGEND            ".colorize(:light_magenta)
 puts "NEW : get a new data structure"
+puts "RUN : executes any inputted code"
+puts "EXIT: exit program"
 puts "==============================".colorize(:light_magenta)
 puts "Press enter to continue . . . "
 gets.chomp
 
 num_correct = 0
 num_wrong = 0
-array = data_structure
+current = data_structure
 playing = true
 while playing == true
   correct = false
-  answer = all_values(array).sample
+  answer = all_values(current).sample
   while correct == false
     puts
-    puts "Here is an array of hashes we have some questions for you about:".colorize(:light_blue)
-    puts "array = "
-    if array.first.is_a? Array
-      PP.pp array
-    elsif array.first.is_a? Fixnum
-      PP.pp array
+    puts "We have some questions for you about this #{current.class.to_s.downcase}:".colorize(:light_blue)
+    puts "current = "
+    if current.first.is_a? Array
+      PP.pp current
+    elsif current.first.is_a? Fixnum
+      PP.pp current
     else
-      ap array, index: false
+      ap current, index: false
     end
     puts
     puts "Write some ruby code to find the following value: ".colorize(:light_blue)
@@ -143,8 +170,12 @@ while playing == true
     puts
     print "[1] ruby_drills(main)> "
     input = gets.chomp
+    # $/ = "RUN"
+    # input = STDIN.gets
+    # input = input.gsub("\n", ";").gsub("RUN", "")
     if input == "NEW"
-      array = data_structure
+      puts "\e[H\e[2J"
+      current = data_structure
       break
     else
       begin
@@ -175,6 +206,9 @@ while playing == true
     puts "Number correct this session: ".colorize(:green) + num_correct.to_s
     puts "Number wrong this session  : ".colorize(:light_red) + num_wrong.to_s
     puts "==============================".colorize(:light_yellow)
+    puts "Press enter to continue . . . "
+    gets.chomp
+    puts "\e[H\e[2J"
   end
 end
 
