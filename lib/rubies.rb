@@ -8,20 +8,11 @@ require_relative 'random_array'
 require_relative 'random_hash'
 
 def data_structure
-  choice = rand(1..3)
-  case choice
-  when 1
-    RandomHash.new.generate
-  when 2
-    RandomArray.new.generate
-  when 3
-    array = Array.new
-    hash = RandomHash.new.generate
-    rand(1..3).times do
-      array << RandomHash.new.hash_three
-    end
-    array
+  combo = Array.new
+  rand(1..3).times do
+    combo << RandomHash.new.hash_three
   end
+  [RandomHash.new.generate, RandomArray.new.generate, combo].sample
 end
 
 def all_values(ds)
@@ -45,20 +36,13 @@ def all_values(ds)
 end
 
 puts "\e[H\e[2J"
-puts"
-.______       __    __  .______   ____    ____
-|   _  \\     |  |  |  | |   _  \\  \\   \\  /   /
-|  |_)  |    |  |  |  | |  |_)  |  \\   \\/   /
-|      /     |  |  |  | |   _  <    \\_    _/
-|  |\\  \\----.|  `--'  | |  |_)  |     |  |
-| _| `._____| \\______/  |______/      |__|
-
- _______  .______       __   __       __          _______.
-|       \\ |   _  \\     |  | |  |     |  |        /       |
-|  .--.  ||  |_)  |    |  | |  |     |  |       |   (----`
-|  |  |  ||      /     |  | |  |     |  |        \\   \\
-|  '--'  ||  |\\  \\----.|  | |  `----.|  `----.----)   |
-|_______/ | _| `._____||__| |_______||_______|_______/
+puts "
+.______       __    __  .______    __   _______     _______.
+|   _  \\     |  |  |  | |   _  \\  |  | |   ____|   /       |
+|  |_)  |    |  |  |  | |  |_)  | |  | |  |__     |   (----`
+|      /     |  |  |  | |   _  <  |  | |   __|     \\   \\
+|  |\\  \\----.|  `--'  | |  |_)  | |  | |  |____.----)   |
+| _| `._____| \\______/  |______/  |__| |_______|_______/
 
 ".colorize(:light_magenta)
 puts "==============================".colorize(:light_magenta)
@@ -68,6 +52,7 @@ puts "NEW : get a new data structure"
 # puts "EXIT: exit program"
 puts "==============================".colorize(:light_magenta)
 puts "Press enter to continue . . . "
+
 gets.chomp
 puts "\e[H\e[2J"
 
@@ -92,7 +77,7 @@ while playing == true
       ap current, index: false
     end
     puts
-    puts "Write some ruby code to find the following value: ".colorize(:light_blue)
+    puts "Write some ruby code to find the following value (or enter NEW for a new challenge): ".colorize(:light_blue)
     puts answer.to_s
     puts
     print "[1] ruby_drills(main)> "
