@@ -20,7 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+I'm currently working on getting this to run from the command line. For now, you can install the right dependencies: 'faker', 'colorize', 'awesome_print'. Then . . .
+
+```
+pry
+[1] pry(main)> require 'rubies'
+```
+
+Then the gem runs.
 
 ## Contributing
 
