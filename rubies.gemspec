@@ -9,6 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Vikram Ramakrishnan"]
   spec.email         = ["lord.ezar@gmail.com"]
   spec.summary       = %q{A Ruby gem to practice small ruby coding drills.}
+  spec.description   = %q{Newcomers to programming would benefit from practicing drills regularly until basic problem solving becomes second nature. This gem is a command line tool that allows users to solve randomly generated small problems. It currently supports drills surrounding complex data structures. }
   spec.homepage      = ""
   spec.license       = "MIT"
 
