@@ -74,16 +74,7 @@ require 'pp'
     end
 
     def generate
-      pick = rand(1..3)
-      case pick
-      when 1
-        @ds = hash_one
-      when 2
-        @ds = hash_two
-      when 3
-        @ds = hash_three
-      end
-      @ds
+      @ds = [hash_one, hash_two, hash_three].sample
     end
   end
 
