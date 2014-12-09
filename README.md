@@ -9,7 +9,9 @@ Newcomers to programming would benefit from practicing drills regularly until ba
 ## Usage
 
 run `rubies` from the command line to start the drills.
+
 type `NEW` to generate a new problem set.
+
 type `exit` to exit the drills.
 
 ## Contributing
