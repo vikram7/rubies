@@ -3,6 +3,30 @@ require 'colorize'
 require 'awesome_print'
 require 'faker'
 require 'pp'
+require 'pry'
+
+# class Exercise
+# end
+
+# class DeepHashExercise < Exercise
+# end
+
+# class SimpleArrayExercise < Exercise
+# end
+
+
+# class BeginnersExerciseManifest
+#   def random_exercise
+
+#   end
+
+#   def weight_map
+#     {
+#       arrays: 0.7
+
+#     }
+# end
+
 
 # module Rubies
   class Hash
@@ -16,7 +40,7 @@ require 'pp'
         end
       end
     end
-  end
+  end #fix re namespacing or in randomhash
 
   class RandomHash < Hash
     def initialize
@@ -34,7 +58,7 @@ require 'pp'
     def has_kids?
       rand(2) == 1
     end
-
+# code smell => each to its own class
     def hash_one
       hash = Hash.new
       10.times do
@@ -82,7 +106,7 @@ require 'pp'
     def initialize
       @ds = Array.new
     end
-
+#single vs double vs triple nested array
     def mini_array
       (-1_000..1_000).sort_by { rand }.sample 3
     end
@@ -103,7 +127,7 @@ require 'pp'
     end
   end
 
-  class Game
+  class Game #gamerun
     def data_structure
       combo = Array.new
       rand(1..3).times do
@@ -189,14 +213,26 @@ require 'pp'
             current = data_structure
             break
           else
+            # runner = Rubies::InputRunner.new(input)
+            # output = runner.run
             begin
-              output = eval(input)
-            rescue StandardError => e
+              routine = lambda { eval(input) }
+              output = routine.call
+            rescue NoMethodError => e
+              puts
+              puts "Sorry, that code resulted in an error:".colorize(:light_red)
+              puts "#{e}".colorize(:red)
+            rescue Exception => e
+              # handler = Rubies::ExceptionHandler.for(e)
+              # handler.output
               puts
               puts "Sorry, that code resulted in an error:".colorize(:light_red)
               puts "#{e}".colorize(:red)
             else
               if answer != output
+                # wrong_answer
+                # @scorekeeper.bump_wrong_count!
+                # Rubies::IncorrectAnswerMessage.new.output
                 num_wrong += 1
                 puts "=> " + output.to_s
                 puts
