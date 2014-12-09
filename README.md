@@ -20,14 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-I'm currently working on getting this to run from the command line. For now, you can install the right dependencies: 'faker', 'colorize', 'awesome_print'. Then . . .
-
-```
-pry
-[1] pry(main)> require 'rubies'
-```
-
-Then the gem runs.
+run `rubies` from the command line to start the drills.
 
 ## Contributing
 

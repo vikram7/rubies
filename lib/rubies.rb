@@ -2,6 +2,7 @@
 require 'colorize'
 require 'awesome_print'
 require 'faker'
+require 'pp'
 
 # module Rubies
   class Hash
@@ -233,4 +234,4 @@ require 'faker'
       end
     end
   end
-#end
+# end
