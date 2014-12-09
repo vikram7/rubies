@@ -1,9 +1,7 @@
 # require "rubies/version"
-require 'pry'
-require 'faker'
 require 'colorize'
-require 'pp'
 require 'awesome_print'
+require 'faker'
 
 # module Rubies
   class Hash
