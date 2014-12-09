@@ -4,23 +4,13 @@ Newcomers to programming would benefit from practicing drills regularly until ba
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'rubies'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install rubies
 
 ## Usage
 
 run `rubies` from the command line to start the drills.
+type `NEW` to generate a new problem set.
+type 'exit' to exit the drills.
 
 ## Contributing
 
