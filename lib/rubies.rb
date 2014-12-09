@@ -3,7 +3,6 @@ require 'colorize'
 require 'awesome_print'
 require 'faker'
 require 'pp'
-require 'pry'
 
 class Hash
   def deep_traverse(&block)

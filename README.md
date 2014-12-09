@@ -12,7 +12,7 @@ run `rubies` from the command line to start the drills.
 
 type `NEW` to generate a new problem set.
 
-type `exit` to exit the drills.
+type `EXIT` to exit the drills.
 
 ## Contributing
 
