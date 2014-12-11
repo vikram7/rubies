@@ -7,6 +7,7 @@ class RandomDataStructure
 
   def initialize
     @data_structure = Array.new
+    @all_values = Array.new
   end
 
   def generate
