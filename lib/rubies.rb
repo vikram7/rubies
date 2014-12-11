@@ -12,8 +12,6 @@ class Game
     @num_right = 0
     @num_wrong = 0
     @playing = true
-    @correct = false
-    @rds = RandomDataStructure.new
   end
 
   def splash
@@ -92,31 +90,35 @@ class Game
     puts "Correct!".colorize(:green)
   end
 
+  def prompter(answer)
+    print "Write some ruby code to find the following value".colorize(:light_blue)
+    print " (or enter ".colorize(:light_blue) + 'NEW'.colorize(:green)
+    puts " for a new challenge): ".colorize(:light_blue)
+    puts answer.to_s
+    puts
+    print "[1] ruby_drills(main)> "
+  end
+
   def byebye
     puts "Thanks for using ".colorize(:green) + "rubies!".colorize(:light_red)
     puts
   end
 
-  def evaluator
-
-  end
-
   def game
     splash
     while @playing
+      @correct = false
+      @rds = RandomDataStructure.new
       current = @rds.generate
       answer = @rds.all_values.sample
       while !@correct
         questioner(current)
-        puts "Write some ruby code to find the following value (or enter ".colorize(:light_blue) + 'NEW'.colorize(:green) + " for a new challenge): ".colorize(:light_blue)
-        puts answer.to_s
-        puts
-        print "[1] ruby_drills(main)> "
+        prompter(answer)
         input = gets.chomp
         input.gsub("\"", "\'")
         if input == "NEW" || input == "new"
           puts "\e[H\e[2J"
-          rds = RandomDataStructure.new
+          @rds = RandomDataStructure.new
           break
         elsif input == "EXIT" || input == "exit"
           scoreboard(@num_right, @num_wrong)
@@ -134,8 +136,8 @@ class Game
             if answer != output
               itswrong(output, answer)
             else
-              itsright(output)
               @correct = true
+              itsright(output)
             end
           end
         end
