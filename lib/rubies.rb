@@ -7,7 +7,6 @@ require_relative 'random_hash'
 require_relative 'random_data_structure'
 
 class Game
-
   def initialize
     @num_right = 0
     @num_wrong = 0
@@ -45,8 +44,8 @@ class Game
   def scoreboard(num_right, num_wrong)
     puts
     puts "==============================".colorize(:light_yellow)
-    puts "Number correct this session: ".colorize(:green) + @num_right.to_s
-    puts "Number wrong this session  : ".colorize(:light_red) + @num_wrong.to_s
+    puts "Number correct this session: ".colorize(:green) + num_right.to_s
+    puts "Number wrong this session  : ".colorize(:light_red) + num_wrong.to_s
     puts "==============================".colorize(:light_yellow)
   end
 
@@ -135,7 +134,7 @@ class Game
     [current, target]
   end
 
-  def play_round #new, exit or check if right/wrong
+  def play_round # new, exit or check if right/wrong
     clear_screen
     correct = false
     current, target = generate_data_structure
@@ -170,5 +169,4 @@ class Game
     end
     byebye
   end
-
 end
