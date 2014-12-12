@@ -7,6 +7,7 @@ class RandomDataStructure
 
   def initialize
     @data_structure = Array.new
+    @all_values = Array.new
   end
 
   def generate
@@ -27,7 +28,7 @@ class RandomDataStructure
       values = @data_structure.flatten
     else
       @data_structure.each do |hash|
-        hash.deep_traverse{ |path, value| values << value }
+        hash.deep_traverse { |_path, value| values << value }
       end
       values.each do |value|
         if value.is_a? Array
@@ -38,5 +39,4 @@ class RandomDataStructure
     end
     values
   end
-
 end

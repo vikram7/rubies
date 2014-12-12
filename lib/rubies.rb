@@ -7,14 +7,13 @@ require_relative 'random_hash'
 require_relative 'random_data_structure'
 
 class Game
-
   def initialize
     @num_right = 0
     @num_wrong = 0
     @playing = true
   end
 
-  def splash
+  def display_splash
     puts "\e[H\e[2J"
     puts "
     .______       __    __  .______    __   _______     _______.
@@ -45,8 +44,8 @@ class Game
   def scoreboard(num_right, num_wrong)
     puts
     puts "==============================".colorize(:light_yellow)
-    puts "Number correct this session: ".colorize(:green) + @num_right.to_s
-    puts "Number wrong this session  : ".colorize(:light_red) + @num_wrong.to_s
+    puts "Number correct this session: ".colorize(:green) + num_right.to_s
+    puts "Number wrong this session  : ".colorize(:light_red) + num_wrong.to_s
     puts "==============================".colorize(:light_yellow)
   end
 
@@ -72,10 +71,8 @@ class Game
     puts "#{error}".colorize(:red)
   end
 
-  def itswrong(output, answer)
+  def itswrong(answer)
     @num_wrong += 1
-    puts "=> " + output.to_s
-    puts
     puts "Sorry, that code is incorrect. ".colorize(:light_red)
     puts
     puts "The right answer is . . . ".colorize(:light_red)
@@ -83,10 +80,8 @@ class Game
     puts "Try again!".colorize(:light_red)
   end
 
-  def itsright(output)
+  def itsright
     @num_right += 1
-    puts "=> " + output.to_s
-    puts
     puts "Correct!".colorize(:green)
   end
 
@@ -100,50 +95,78 @@ class Game
   end
 
   def byebye
-    puts "Thanks for using ".colorize(:green) + "rubies!".colorize(:light_red)
     puts
+    puts "Thanks for using ".colorize(:green) + "rubies!".colorize(:light_red)
+    display_score
+  end
+
+  def display_score
+    scoreboard(@num_right, @num_wrong)
+  end
+
+  def clear_screen
+    puts "\e[H\e[2J"
+  end
+
+  def prompt(data_structure, target)
+    questioner(data_structure)
+    prompter(target)
+    gets.chomp.gsub("\"", "\'")
+  end
+
+  def check_answer(current, input, target)
+    begin
+      routine = lambda { eval(input) }
+      output = routine.call
+      puts "=> #{output}"
+      puts
+      output == target
+    rescue Exception => e
+      eprinter(e)
+      false
+    end
+  end
+
+  def generate_data_structure
+    rds = RandomDataStructure.new
+    current = rds.generate
+    target = rds.all_values.sample
+    [current, target]
+  end
+
+  def play_round # new, exit or check if right/wrong
+    clear_screen
+    correct = false
+    current, target = generate_data_structure
+    while !correct
+      input = prompt(current, target)
+      if input == "NEW" || input == "new"
+        return
+      elsif input == "EXIT" || input == "exit"
+        @playing = false
+        return
+      else
+        if check_answer(current, input, target)
+          itsright
+          correct = true
+        else
+          itswrong(target)
+        end
+      end
+      scoreboard(@num_right, @num_wrong)
+      continuer
+    end
+  end
+
+  def gameover?
+    !@playing
   end
 
   def game
-    splash
-    while @playing
-      @correct = false
-      @rds = RandomDataStructure.new
-      current = @rds.generate
-      answer = @rds.all_values.sample
-      while !@correct
-        questioner(current)
-        prompter(answer)
-        input = gets.chomp
-        input.gsub("\"", "\'")
-        if input == "NEW" || input == "new"
-          puts "\e[H\e[2J"
-          @rds = RandomDataStructure.new
-          break
-        elsif input == "EXIT" || input == "exit"
-          scoreboard(@num_right, @num_wrong)
-          byebye
-          exit
-        else
-          begin
-            routine = lambda { eval(input) }
-            output = routine.call
-          rescue NoMethodError => e
-            eprinter(e)
-          rescue Exception => e
-            eprinter(e)
-          else
-            if answer != output
-              itswrong(output, answer)
-            else
-              @correct = true
-              itsright(output)
-            end
-          end
-        end
-        scoreboard(@num_right, @num_wrong)
-        continuer
-      end
+    display_splash
+    while !gameover?
+      play_round
     end
+    byebye
   end
 end
