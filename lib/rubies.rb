@@ -24,11 +24,13 @@ class Game
     | _| `._____| \\______/  |______/  |__| |_______|_______/
 
     ".colorize(:light_magenta)
-    puts "================================================================".colorize(:light_magenta)
-    puts "                           LEGEND            ".colorize(:light_magenta)
-    puts "               NEW : get a new data structure"
-    puts "               EXIT: exit program"
-    puts "================================================================".colorize(:light_magenta)
+    puts "
+    ================================================================
+                               LEGEND
+                   NEW : get a new data structure
+                   EXIT: exit program
+    ================================================================
+    ".colorize(:light_magenta)
     puts "Press enter to continue . . . "
 
     gets.chomp
@@ -86,12 +88,12 @@ class Game
   end
 
   def prompter(answer)
-    print "Write some ruby code to find the following value".colorize(:light_blue)
+    print "Write ruby code to find the following value".colorize(:light_blue)
     print " (or enter ".colorize(:light_blue) + 'NEW'.colorize(:green)
     puts " for a new challenge): ".colorize(:light_blue)
     puts answer.to_s
     puts
-    print "[1] ruby_drills(main)> "
+    print "[1] rubies(main)> "
   end
 
   def byebye
@@ -138,7 +140,7 @@ class Game
     clear_screen
     correct = false
     current, target = generate_data_structure
-    while !correct
+    until correct
       input = prompt(current, target)
       if input == "NEW" || input == "new"
         return
@@ -164,7 +166,7 @@ class Game
 
   def game
     display_splash
-    while !gameover?
+    until gameover?
       play_round
     end
     byebye
