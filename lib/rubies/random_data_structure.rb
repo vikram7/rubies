@@ -31,14 +31,8 @@ module Rubies
         @data_structure.each do |hash|
           hash.deep_traverse { |_path, value| values << value }
         end
-        values.each do |value|
-          if value.is_a? Array
-            value.each { |element| values << element }
-            values.delete(value)
-          end
-        end
       end
-      values
+      values.flatten!
     end
   end
 end
