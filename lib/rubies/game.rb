@@ -1,9 +1,19 @@
 module Rubies
   class Game
-    def initialize
+    def initialize(opts={})
       @num_right = 0
       @num_wrong = 0
       @playing = true
+      @in = opts.fetch(:in, $stdin)
+      @out = opts.fetch(:out, $stdout)
+    end
+
+    def puts(message)
+      @out.puts message
+    end
+
+    def gets
+      @in.gets
     end
 
     def display_splash
@@ -157,6 +167,7 @@ module Rubies
       !@playing
     end
 
+    #should rename to 'run'
     def game
       display_splash
       until gameover?
