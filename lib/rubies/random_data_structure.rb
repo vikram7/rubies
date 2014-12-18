@@ -32,7 +32,7 @@ module Rubies
           hash.deep_traverse { |_path, value| values << value }
         end
       end
-      values.flatten!
+      values.flatten
     end
   end
 end

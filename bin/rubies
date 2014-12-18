@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/rubies'
-@game = Rubies::Game.new.game
+@game = Rubies::Game.new
 @game.game
