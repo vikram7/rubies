@@ -8,7 +8,7 @@ module Rubies
       @out = opts.fetch(:out, $stdout)
     end
 
-    def puts(message='\n')
+    def puts(message)
       @out.puts message
     end
 
