@@ -1,8 +1,5 @@
 require 'rubies'
 
-require 'minitest/autorun'
-require 'minitest/pride'
-
 #provides the stdin interface to test the Rubies::Game class.
 class FakeInput
 
