@@ -5,12 +5,11 @@ module Rubies
 
     before do
       @input = FakeInput.new([])
-      @game = Rubies::Game.new({in: @input})
+      @game = Rubies::Game.new({ in: @input })
     end
 
     it "displays splash" do
       @input << "\n" #add enter to the input
-
       @game.display_splash
       expect(@input.size).to eq(0)
     end

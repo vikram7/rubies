@@ -11,6 +11,5 @@ module Rubies
       Rubies::RandomArray.new.generate
     end
 
-
   end
 end
