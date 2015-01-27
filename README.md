@@ -8,11 +8,44 @@ Newcomers to programming would benefit from practicing drills regularly until ba
 
 ## Usage
 
-run `rubies` from the command line to start the drills.
+```
+rubies
+```
 
-type `NEW` to generate a new problem set.
+After typing `rubies` into your terminal, you will see the Splash screen:
 
-type `EXIT` to exit the drills.
+![alt text](http://i.imgur.com/PGvyVEC.png)
+
+After starting, you will see randomly generated data structures for you to work through:
+
+![alt text](http://i.imgur.com/zCHl7Sq.png)
+
+Here, you are being asked to find `865` in the array called `current`, which is located in the 3rd position (or index of `2`). The answer would be the following:
+
+```
+[1] rubies(main)> current[2]
+=> 865
+```
+
+![alt text](http://i.imgur.com/MYH1ynW.png)
+
+Here, you are given a hash called `current` and are being asked to find the right command for `engineer collaborative schemas`. The key associated with that value is `Bergnaum-Pouros`, so the answer would be the following:
+
+```
+[1] rubies(main)> current["Bergnaum-Pouros"]
+=> enable collaborative schemas
+```
+
+![alt text](http://i.imgur.com/DIjspdO.png)
+
+Here, you are given an array with a hash in it, or a compound data structure, and are being asked to find `(106) 777-4274`. This is how you could go about it:
+
+```
+[1] rubies(main)> current[0]["Mikel Herman"]["phone"]
+=> (106) 777-4274
+```
+
+Type `new` to get another data structure or `exit` to quit and see your final score. Try to do 15-20 minutes every day and you will be in great shape!
 
 ## Contributing
 
