@@ -17,33 +17,45 @@ module Rubies
     end
 
     def display_splash
-      puts "\e[H\e[2J"
-      puts "
-    .______       __    __  .______    __   _______     _______.
-    |   _  \\     |  |  |  | |   _  \\  |  | |   ____|   /       |
-    |  |_)  |    |  |  |  | |  |_)  | |  | |  |__     |   (----`
-    |      /     |  |  |  | |   _  <  |  | |   __|     \\   \\
-    |  |\\  \\----.|  `--'  | |  |_)  | |  | |  |____.----)   |
-    | _| `._____| \\______/  |______/  |__| |_______|_______/
+      begin
+        puts "\e[H\e[2J"
+        puts "
+      .______       __    __  .______    __   _______     _______.
+      |   _  \\     |  |  |  | |   _  \\  |  | |   ____|   /       |
+      |  |_)  |    |  |  |  | |  |_)  | |  | |  |__     |   (----`
+      |      /     |  |  |  | |   _  <  |  | |   __|     \\   \\
+      |  |\\  \\----.|  `--'  | |  |_)  | |  | |  |____.----)   |
+      | _| `._____| \\______/  |______/  |__| |_______|_______/
 
-    ".colorize(:light_magenta)
-      puts "
-    ================================================================
-                               LEGEND
-                   NEW : get a new data structure
-                   EXIT: exit program
-    ================================================================
-    ".colorize(:light_magenta)
-      puts "Press enter to continue . . . "
+      ".colorize(:light_magenta)
+        puts "
+      ================================================================
+                                 LEGEND
+                     NEW : get a new data structure
+                     EXIT: exit program
+      ================================================================
+      ".colorize(:light_magenta)
+        puts "Press enter to continue . . . "
 
-      gets.chomp
-      puts "\e[H\e[2J"
+        gets.chomp
+        puts "\e[H\e[2J"
+      rescue Interrupt => e
+        @playing = false
+        byebye
+        exit
+      end
     end
 
     def continuer
-      puts "Press enter to continue . . . "
-      gets.chomp
-      puts "\e[H\e[2J"
+      begin
+        puts "Press enter to continue . . . "
+        gets.chomp
+        puts "\e[H\e[2J"
+      rescue Interrupt => e
+        @playing = false
+        byebye
+        exit
+      end
     end
 
     def scoreboard(num_right, num_wrong)
@@ -71,9 +83,14 @@ module Rubies
     end
 
     def eprinter(error)
+      encoding_options = {
+      :invalid           => :replace,  # Replace invalid byte sequences
+      :undef             => :replace,  # Replace anything not defined in ASCII
+      :replace           => '',        # Use a blank for those replacements
+      }
       puts
       puts "Sorry, that code resulted in an error:".colorize(:light_red)
-      puts "#{error}".colorize(:red)
+      puts "#{error}".encode(Encoding.find('ASCII'), encoding_options).colorize(:red)
     end
 
     def itswrong(answer)
@@ -114,9 +131,15 @@ module Rubies
     end
 
     def prompt(data_structure, target)
-      questioner(data_structure)
-      prompter(target)
-      gets.chomp.gsub("\"", "\'")
+      begin
+        questioner(data_structure)
+        prompter(target)
+        gets.chomp.gsub("\"", "\'")
+      rescue Interrupt => e
+        @playing = false
+        byebye
+        exit
+      end
     end
 
     def check_answer(current, input, target)
@@ -144,7 +167,7 @@ module Rubies
       correct = false
       current, target = generate_data_structure
       until correct
-        input = prompt(current, target)
+        input = prompt(current, target).rstrip
         if input == "NEW" || input == "new"
           return
         elsif input == "EXIT" || input == "exit"
