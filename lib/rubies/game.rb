@@ -167,7 +167,7 @@ module Rubies
       correct = false
       current, target = generate_data_structure
       until correct
-        input = prompt(current, target).rstrip
+        input = prompt(current, target).rstrip.lstrip
         if input == "NEW" || input == "new"
           return
         elsif input == "EXIT" || input == "exit"
