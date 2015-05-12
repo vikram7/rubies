@@ -142,19 +142,6 @@ module Rubies
       end
     end
 
-    def check_answer(current, input, target)
-      begin
-        routine = lambda { eval(input) }
-        output = routine.call
-        puts "=> #{output}"
-        puts
-        output == target
-      rescue Exception => e
-        eprinter(e)
-        false
-      end
-    end
-
     def generate_data_structure
       rds = RandomDataStructure.new
       current = rds.generate
@@ -198,6 +185,21 @@ module Rubies
       end
       byebye
     end
-  end
 
+  private
+
+    def check_answer(current, input, target)
+      begin
+        routine = lambda { eval(input) }
+        output = routine.call
+        puts "=> #{output}"
+        puts
+        output == target
+      rescue Exception => e
+        eprinter(e)
+        false
+      end
+    end
+
+  end
 end
