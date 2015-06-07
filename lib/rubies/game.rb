@@ -13,7 +13,9 @@ module Rubies
     end
 
     def gets
-      @in.gets
+      input = @in.gets
+      raise "No cheating allowed" if Ripper.sexp(input)[1][0].include?(:defs)
+      input
     end
 
     def display_splash
