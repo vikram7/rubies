@@ -14,7 +14,7 @@ module Rubies
 
     def gets
       input = @in.gets
-      raise "No cheating allowed" if Ripper.sexp(input)[1][0].include?(:defs)
+      check_for_cheaters(input)
       input
     end
 
@@ -200,6 +200,13 @@ module Rubies
       rescue Exception => e
         eprinter(e)
         false
+      end
+    end
+
+    def check_for_cheaters(input)
+      banned_terms = [:defs, "check_answer", :method_add_block]
+      banned_terms.each do |term|
+        raise "No cheating allowed" if Ripper.sexp(input).flatten.include?(term)
       end
     end
 
