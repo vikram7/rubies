@@ -163,7 +163,7 @@ module Rubies
           @playing = false
           return
         else
-          if check_answer(current, input, target)
+          if !check_for_cheaters(input) && check_answer(current, input, target)
             itsright
             correct = true
           else
@@ -188,7 +188,7 @@ module Rubies
       byebye
     end
 
-  private
+    private
 
     def check_answer(current, input, target)
       begin
@@ -205,10 +205,7 @@ module Rubies
 
     def check_for_cheaters(input)
       banned_terms = [:defs, "check_answer", :method_add_block]
-      banned_terms.each do |term|
-        raise "No cheating allowed" if Ripper.sexp(input).flatten.include?(term)
-      end
+      banned_terms.any? { |term| Ripper.sexp(input).flatten.include?(term) }
     end
-
   end
 end
