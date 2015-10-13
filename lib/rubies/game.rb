@@ -13,7 +13,9 @@ module Rubies
     end
 
     def gets
-      @in.gets
+      input = @in.gets
+      check_for_cheaters(input)
+      input
     end
 
     def display_splash
@@ -142,19 +144,6 @@ module Rubies
       end
     end
 
-    def check_answer(current, input, target)
-      begin
-        routine = lambda { eval(input) }
-        output = routine.call
-        puts "=> #{output}"
-        puts
-        output == target
-      rescue Exception => e
-        eprinter(e)
-        false
-      end
-    end
-
     def generate_data_structure
       rds = RandomDataStructure.new
       current = rds.generate
@@ -174,7 +163,7 @@ module Rubies
           @playing = false
           return
         else
-          if check_answer(current, input, target)
+          if !check_for_cheaters(input) && check_answer(current, input, target)
             itsright
             correct = true
           else
@@ -198,6 +187,25 @@ module Rubies
       end
       byebye
     end
-  end
 
+    private
+
+    def check_answer(current, input, target)
+      begin
+        routine = lambda { eval(input) }
+        output = routine.call
+        puts "=> #{output}"
+        puts
+        output == target
+      rescue Exception => e
+        eprinter(e)
+        false
+      end
+    end
+
+    def check_for_cheaters(input)
+      banned_terms = [:defs, "check_answer", :method_add_block]
+      banned_terms.any? { |term| Ripper.sexp(input).flatten.include?(term) }
+    end
+  end
 end
