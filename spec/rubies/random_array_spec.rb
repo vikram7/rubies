@@ -16,7 +16,7 @@ module Rubies
     end
 
     it "#mini_array returns three numbers" do
-      array = @random_array.mini_array.map { |x| x.class }
+      array = @random_array.mini_array.map(&:class)
       expect(array.uniq.first).to eq(Fixnum)
     end
 
@@ -26,9 +26,8 @@ module Rubies
     end
 
     it "#nesting_array returns array with Fixnum only elements" do
-      array = @random_array.nesting_array.flatten
-      array.map! { |x| x.class }.uniq!
-      expect(array.first).to eq(Fixnum)
+      array = @random_array.nesting_array.flatten.map(&:class).uniq
+      expect(array).to eq([Fixnum])
     end
   end
 end
