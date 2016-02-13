@@ -7,13 +7,8 @@ module Rubies
 
     def nesting_array
       result = []
-      rand(1..3).times do
-        result << mini_array
-      end
-      result.each do |array|
-        array << self.mini_array
-      end
-      result
+      rand(1..3).times { result << mini_array }
+      result.each { |array| array << self.mini_array }
     end
 
     def generate
