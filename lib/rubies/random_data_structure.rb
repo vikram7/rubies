@@ -4,11 +4,11 @@ require 'faker'
 
 module Rubies
   class RandomDataStructure
-    attr_reader :data_structure
+    attr_accessor :data_structure
 
     def initialize
-      @data_structure = Array.new
-      @all_values = Array.new
+      @data_structure = []
+      @all_values = []
     end
 
     def generate
