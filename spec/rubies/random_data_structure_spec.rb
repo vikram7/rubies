@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 module Rubies
   describe RandomDataStructure do
@@ -33,7 +33,7 @@ module Rubies
     end
 
     it "#all_values returns expected array for Array" do
-      @random_data_structure.data_structure = [1, 2, [3, 4], [5,[6]]]
+      @random_data_structure.data_structure = [1, 2, [3, 4], [5, [6]]]
       expect(@random_data_structure.all_values).to eq([1, 2, 3, 4, 5, 6])
     end
 
