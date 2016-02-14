@@ -14,19 +14,16 @@ module Rubies
 
   class RandomHash < MyHash
     def initialize
-      @ds = MyHash.new
+      @data_structure = MyHash.new
     end
 
     def children
-      array = Array.new
-      rand(1..3).times do
-        array << Faker::Name.first_name
-      end
-      array
+      rand = rand(1..3)
+      Array.new(rand) { Faker::Name.first_name }
     end
 
     def has_kids?
-      rand(2) == 1
+      [true, false].sample
     end
 
     def hash_one
@@ -51,24 +48,18 @@ module Rubies
 
     def hash_three
       hash = MyHash.new
-      length = rand(1..5)
-      count = 1
-      while count <= length
+      rand(1..5).times do
         details = Hash.new
-        name = Faker::Name.name
-        phone = Faker::PhoneNumber.cell_phone
-        company = Faker::Company.name
-        details["phone"] = phone
-        details["company"] = company
+        details["phone"] = Faker::PhoneNumber.cell_phone
+        details["company"] = Faker::Company.name
         details["children"] = children if has_kids?
-        hash[name] = details
-        count += 1
+        hash[Faker::Name.name] = details
       end
       hash
     end
 
     def generate
-      @ds = [hash_one, hash_two, hash_three].sample
+      @data_structure = [hash_one, hash_two, hash_three].sample
     end
   end
 end
