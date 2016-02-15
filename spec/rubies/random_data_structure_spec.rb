@@ -66,20 +66,20 @@ module Rubies
       expected =
         [
           {
-            "fox"=>"mulder1",
-            "dana"=>"scully1",
-            "phone"=>"123-456-7891",
-            "company"=>"FBI1"
+            "fox" => "mulder1",
+            "dana" => "scully1",
+            "phone" => "123-456-7891",
+            "company" => "FBI1"
           },
           "FBI1",
           "123-456-7891",
           "scully1",
           "mulder1",
           {
-            "fox"=>"mulder0",
-            "dana"=>"scully0",
-            "phone"=>"123-456-7890",
-            "company"=>"FBI0"
+            "fox" => "mulder0",
+            "dana" => "scully0",
+            "phone" => "123-456-7890",
+            "company" => "FBI0"
           },
           "FBI0",
           "123-456-7890",
