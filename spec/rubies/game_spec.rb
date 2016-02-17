@@ -2,25 +2,31 @@ require 'spec_helper'
 
 module Rubies
   describe Game do
-
     before do
       @input = FakeInput.new([])
       @game = Rubies::Game.new({ in: @input })
     end
 
-    it "displays splash" do
-      @input << "\n" #add enter to the input
-      @game.display_splash
-      expect(@input.size).to eq(0)
+    it "#initializes a game correctly" do
+      expect(@game.num_right).to eq(0)
+      expect(@game.num_wrong).to eq(0)
+      expect(@game.playing).to eq(true)
     end
 
-    it "displays score" do
-      #@game.display_score
+    it "#generate_data_structure returns a data structure and target" do
+      output = @game.generate_data_structure
+      expect(is_hash_my_hash_or_array(output.first)).to eq(true)
+      expect(is_hash_or_fixnum(output.last)).to eq(true)
     end
-
-    it "has scoreboard" do
-      #@game.scoreboard(10, 10)
-    end
-
   end
+end
+
+def is_hash_my_hash_or_array(data_structure)
+  klass = data_structure.class
+  [Hash, Rubies::MyHash, Array].any?(&klass.method(:==))
+end
+
+def is_hash_or_fixnum(value)
+  klass = value.class
+  [Hash, Fixnum].any?(&klass.method(:==))
 end
