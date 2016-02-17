@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/vikram7/rubies/badges/gpa.svg)](https://codeclimate.com/github/vikram7/rubies)
+
 # Rubies
 
 Newcomers to programming would benefit from practicing drills regularly until basic problem solving becomes second nature. This gem is a command line tool that allows users to solve randomly generated small problems.
