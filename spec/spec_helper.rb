@@ -1,4 +1,6 @@
-require 'rubies'
+require "rubies"
+require "coveralls"
+Coveralls.wear!
 
 #provides the stdin interface to test the Rubies::Game class.
 class FakeInput
