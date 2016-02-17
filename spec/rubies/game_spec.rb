@@ -14,9 +14,11 @@ module Rubies
     end
 
     it "#generate_data_structure returns a data structure and target" do
-      output = @game.generate_data_structure
-      expect(is_one_of_these_things_like_the_other?([Hash, Rubies::MyHash, Array], output.first)).to eq(true)
-      expect(is_one_of_these_things_like_the_other?([Hash, Fixnum, String], output.last)).to eq(true)
+      rds = @game.generate_data_structure
+      hra = [Hash, Rubies::MyHash, Array]
+      hfs = [Hash, Fixnum, String]
+      expect(is_one_of_these_things_like_the_other?(hra, rds[0])).to eq(true)
+      expect(is_one_of_these_things_like_the_other?(hfs, rds[1])).to eq(true)
     end
 
     it "#gameover? returns false if @playing is true" do
