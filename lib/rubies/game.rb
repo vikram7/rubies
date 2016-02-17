@@ -1,6 +1,7 @@
 module Rubies
   class Game
-    attr_reader :num_right, :num_wrong, :playing
+    attr_reader :num_right, :num_wrong
+    attr_accessor :playing
 
     def initialize(opts={})
       @num_right = 0
