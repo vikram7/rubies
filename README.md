@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/vikram7/rubies/badges/gpa.svg)](https://codeclimate.com/github/vikram7/rubies)
+[![Code Climate](https://codeclimate.com/github/vikram7/rubies/badges/gpa.svg)](https://codeclimate.com/github/vikram7/rubies) [![Coverage Status](https://coveralls.io/repos/github/vikram7/rubies/badge.svg?branch=master)](https://coveralls.io/github/vikram7/rubies?branch=master)
 
 # Rubies
 
