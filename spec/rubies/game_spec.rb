@@ -32,6 +32,18 @@ module Rubies
       is_gameover = @game.gameover?
       expect(is_gameover).to eq(false)
     end
+
+    it "#itswrong increments @num_wrong by one" do
+      expect(@game.num_wrong).to eq(0)
+      @game.itswrong("anything")
+      expect(@game.num_wrong).to eq(1)
+    end
+
+    it "#itsright increments @num_right by one" do
+      expect(@game.num_right).to eq(0)
+      @game.itsright
+      expect(@game.num_right).to eq(1)
+    end
   end
 end
 
