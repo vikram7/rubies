@@ -66,8 +66,8 @@ module Rubies
     def scoreboard(num_right, num_wrong)
       puts
       puts "==============================".colorize(:light_yellow)
-      puts "Number correct this session: ".colorize(:green) + num_right.to_s
-      puts "Number wrong this session  : ".colorize(:light_red) + num_wrong.to_s
+      puts "Number correct this session: #{num_right}".colorize(:green)
+      puts "Number wrong this session  : #{num_wrong}".colorize(:light_red)
       puts "==============================".colorize(:light_yellow)
     end
 
@@ -103,7 +103,7 @@ module Rubies
       puts "Sorry, that code is incorrect. ".colorize(:light_red)
       puts
       puts "The right answer is . . . ".colorize(:light_red)
-      puts answer.to_s
+      puts "#{answer}"
       puts "Try again!".colorize(:light_red)
     end
 
@@ -116,7 +116,7 @@ module Rubies
       print "Write ruby code to find the following value".colorize(:light_blue)
       print " (or enter ".colorize(:light_blue) + 'NEW'.colorize(:green)
       puts " for a new challenge): ".colorize(:light_blue)
-      puts answer.to_s
+      puts "#{answer}"
       puts
       print "[1] rubies(main)> "
     end
