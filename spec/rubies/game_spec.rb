@@ -44,6 +44,14 @@ module Rubies
       @game.itsright
       expect(@game.num_right).to eq(1)
     end
+
+    it "#check_for_cheaters returns true if input is bad" do
+      expect(@game.send(:check_for_cheaters, "check_answer")).to eq(true)
+    end
+
+    it "#check_for_cheaters returns false if input is not bad" do
+      expect(@game.send(:check_for_cheaters, "current[0]")).to eq(false)
+    end
   end
 end
 
