@@ -4,7 +4,7 @@
 
 Newcomers to programming would benefit from practicing drills regularly until basic problem solving becomes second nature. This gem is a command line tool that allows users to solve randomly generated small problems.
 
-It currently supports drills surrounding simple and complex data structures.
+It currently supports drills surrounding simple and complex data structures. I would like more complex problems to be part of the suite soon. Right now, they are intended towards navigating simple to compound data structures as this is often an area that newcomers to programming find confusing.
 
 ## Installation
 
